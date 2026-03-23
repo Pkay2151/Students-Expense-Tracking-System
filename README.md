@@ -1,2 +1,2 @@
 # Students-Expense-Tracking-System
-A web-based application that helps students track, manage, and analyze their daily expenses.
+The Student Expense Tracking System is a financial management application tailored for students. It enables users to log daily expenses, categorize transactions, monitor spending patterns, and maintain budgets. The system aims to improve financial awareness and help students make smarter spending decisions through simple and intuitive tools.
