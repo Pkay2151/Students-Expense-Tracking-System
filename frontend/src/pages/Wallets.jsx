@@ -33,7 +33,7 @@ function Wallets() {
 
   const getCategoryConfig = (category, type) => {
     if (type === 'transfer') return { icon: <ArrowRightLeft size={18} color="#1d4ed8" />, bg: '#dbeafe' };
-    if (type === 'income') return { icon: <Plus size={18} color="#159a83" />, bg: '#dff2ec' };
+    if (type === 'income') return { icon: <Plus size={18} color="#0b4f6c" />, bg: '#dbe8ef' };
     switch(category) {
       case 'Food & Drinks': return { icon: <Utensils size={18} color="#b87a1d" />, bg: '#fdeaca' };
       case 'Transport': return { icon: <Bus size={18} color="#1d4ed8" />, bg: '#dbeafe' };

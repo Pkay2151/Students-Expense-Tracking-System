@@ -128,7 +128,7 @@ function Analytics() {
                   {breakdownData.map((item, idx) => {
                     let icon = '🛒'; let iconBg = '#eceff1'; let color = '#455a64';
                     if (item.label.includes('Food')) { icon = '🍴'; iconBg = '#fdeaca'; color = '#f5a623'; }
-                    else if (item.label.includes('Transport')) { icon = '🚆'; iconBg = '#dff2ec'; color = '#19b69b'; }
+                    else if (item.label.includes('Transport')) { icon = '🚆'; iconBg = '#dbe8ef'; color = '#0b4f6c'; }
                     else if (item.label.includes('Learn') || item.label.includes('Education')) { icon = '🎓'; iconBg = '#dbeafe'; color = '#1d4ed8'; }
                     else if (item.label.includes('Util')) { icon = '💡'; iconBg = '#d1fae5'; color = '#047857'; }
                     else if (item.label.includes('Entertain')) { icon = '🍿'; iconBg = '#fce7f3'; color = '#be185d'; }

@@ -35,7 +35,7 @@ function Home() {
 
   const getCategoryConfig = (category, type) => {
     if (type === 'transfer') return { icon: <ArrowRightLeft size={18} color="#1d4ed8" />, bg: '#dbeafe' };
-    if (type === 'income') return { icon: <Plus size={18} color="#159a83" />, bg: '#dff2ec' };
+    if (type === 'income') return { icon: <Plus size={18} color="#0b4f6c" />, bg: '#dbe8ef' };
     switch(category) {
       case 'Food & Drinks': return { icon: <Utensils size={18} color="#b87a1d" />, bg: '#fdeaca' };
       case 'Transport': return { icon: <Bus size={18} color="#1d4ed8" />, bg: '#dbeafe' };
@@ -51,7 +51,7 @@ function Home() {
     title: "Student Tip",
     message: "Log your daily expenses consistently to get personalized insights on your spending habits!",
     action: "Explore Financial Guides →",
-    color: "#159a83"
+    color: "#0b4f6c"
   };
 
   const getHighestExpense = () => {
@@ -110,7 +110,7 @@ function Home() {
       title: "Savings Opportunity",
       message: `Great job keeping expenses low! Consider moving a portion of your GH¢${totalBalance.toFixed(2)} available balance into a dedicated savings bucket.`,
       action: "Set up Savings →",
-      color: "#159a83"
+      color: "#0b4f6c"
     };
   }
 
@@ -199,7 +199,7 @@ function Home() {
                   
                   let color = '#455a64';
                   if (b.category.includes('Food')) color = '#f5a623';
-                  else if (b.category.includes('Transport')) color = '#19b69b';
+                  else if (b.category.includes('Transport')) color = '#0b4f6c';
 
                   return (
                     <BudgetBar 

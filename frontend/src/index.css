@@ -1,20 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --primary: #19B69B;
-  --primary-hover: #159a83;
+  --primary: #0b4f6c;
+  --primary-hover: #093f56;
   --text-main: #111111;
-  --text-muted: #666666;
+  --text-muted: #5f6b74;
   --bg-color: #ffffff;
-  --border-color: #e0e0e0;
+  --border-color: #d9e2e8;
   --input-bg: #ffffff;
-  --sidebar-bg: #f4f7f6;
-  --sidebar-active-bg: #e3f2ee;
-  --sidebar-text: #5f746e;
-  --sidebar-active-text: #19B69B;
-  --dashboard-bg: #f7f9fc;
-  --card-dark: #0c6b58;
-  --card-mint: #66d6b4;
+  --sidebar-bg: #f2f6f8;
+  --sidebar-active-bg: #dbe8ef;
+  --sidebar-text: #49606b;
+  --sidebar-active-text: #0b4f6c;
+  --dashboard-bg: #f4f7fb;
+  --card-dark: #0b4f6c;
+  --card-mint: #b7d1df;
   --card-light: #ffffff;
 }
 
@@ -30,7 +30,7 @@ html, body {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   color: var(--text-main);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -68,7 +68,7 @@ p.subtitle {
 .auth-layout-container {
   display: flex;
   min-height: 100vh;
-  background-color: #f7f9fc;
+  background-color: var(--dashboard-bg);
 }
 
 .auth-form-wrapper {
@@ -193,7 +193,7 @@ p.subtitle {
 
 /* Welcome Page Specific Styles */
 .welcome-container {
-  background-color: var(--primary);
+  background: linear-gradient(145deg, #136086 0%, #0b4f6c 100%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -326,7 +326,7 @@ p.subtitle {
 .brand-title {
   font-size: 28px;
   font-weight: 800;
-  color: #0c6b58;
+  color: #0b4f6c;
   letter-spacing: -0.5px;
 }
 
@@ -350,7 +350,7 @@ p.subtitle {
 }
 
 .sidebar-link:hover {
-  background-color: rgba(25, 182, 155, 0.05);
+  background-color: rgba(11, 79, 108, 0.1);
 }
 
 .sidebar-link.active {

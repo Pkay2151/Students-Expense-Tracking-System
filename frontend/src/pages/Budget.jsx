@@ -60,8 +60,8 @@ function Budget() {
               <h4 style={{fontSize: '12px', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '8px'}}>TOTAL SPENT</h4>
               <h2 className="wallet-card-balance" style={{fontSize: '32px', color: 'var(--text-main)'}}>GH¢{totalSpent.toFixed(2)}</h2>
               <div style={{display: 'flex', alignItems: 'center', gap: '6px', marginTop: '8px'}}>
-                 <div style={{width: '8px', height: '8px', borderRadius: '50%', backgroundColor: overallUsedPercent > 80 ? '#e11d48' : '#19b69b'}}></div>
-                 <p style={{fontSize: '12px', color: overallUsedPercent > 80 ? '#e11d48' : '#19b69b', fontWeight: 600}}>{overallUsedPercent.toFixed(1)}% Used</p>
+                 <div style={{width: '8px', height: '8px', borderRadius: '50%', backgroundColor: overallUsedPercent > 80 ? '#e11d48' : '#0b4f6c'}}></div>
+                 <p style={{fontSize: '12px', color: overallUsedPercent > 80 ? '#e11d48' : '#0b4f6c', fontWeight: 600}}>{overallUsedPercent.toFixed(1)}% Used</p>
               </div>
             </div>
           </div>
@@ -85,7 +85,7 @@ function Budget() {
                 let colorBar = '#455a64';
 
                 if (b.category.includes('Food')) { icon = '🍴'; iconBg = '#fdeaca'; colorBar = '#f5a623'; }
-                else if (b.category.includes('Transport')) { icon = '🚆'; iconBg = '#dff2ec'; colorBar = '#19b69b'; }
+                else if (b.category.includes('Transport')) { icon = '🚆'; iconBg = '#dbe8ef'; colorBar = '#0b4f6c'; }
 
                 return (
                   <div key={b.id} className="widget-card" style={{padding: '24px'}}>

@@ -111,7 +111,7 @@ h3 {
   border-radius: 24px;
   padding: 32px;
   color: white;
-  box-shadow: 0 10px 30px rgba(12, 107, 88, 0.2);
+  box-shadow: 0 10px 30px rgba(11, 79, 108, 0.2);
 }
 
 .card-label {
@@ -219,7 +219,7 @@ h3 {
 }
 
 .badge {
-  background: #e3f2ee;
+  background: #dbe8ef;
   color: var(--card-dark);
   padding: 4px 8px;
   border-radius: 8px;
@@ -389,7 +389,7 @@ h3 {
 
 .wallet-card.mint {
   background-color: var(--card-mint);
-  color: #08493b; /* Darker text for mint card */
+  color: #0d3549; /* Darker text for blue tint card */
 }
 
 .wallet-card.light {
@@ -501,7 +501,7 @@ h3 {
 }
 
 .quick-move-card {
-  background-color: #e3f2ee;
+  background-color: #dbe8ef;
   border-radius: 20px;
   padding: 24px;
   margin-top: 24px;
