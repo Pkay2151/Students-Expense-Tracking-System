@@ -323,6 +323,10 @@ p.subtitle {
   padding-left: 16px;
 }
 
+.sidebar-logo img {
+  filter: brightness(0) saturate(100%) invert(22%) sepia(43%) saturate(980%) hue-rotate(160deg) brightness(92%) contrast(96%);
+}
+
 .brand-title {
   font-size: 28px;
   font-weight: 800;
