@@ -117,6 +117,28 @@ p.subtitle {
   color: var(--text-main);
 }
 
+.auth-brand-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.auth-logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.auth-brand-text {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--primary);
+  line-height: 1;
+}
+
 /* Base button styles */
 .btn {
   display: flex;
@@ -229,6 +251,7 @@ p.subtitle {
   max-width: 80%;
   height: auto;
   margin-bottom: 24px;
+  filter: brightness(0) invert(1);
 }
 
 .welcome-title {
