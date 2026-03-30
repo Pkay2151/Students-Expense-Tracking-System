@@ -1,13 +1,9 @@
- const express = require("express");
+const express = require("express");
+
+const { getHealth } = require("../controllers/healthController");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.json({
-    status: "ok",
-    service: "students-expense-tracking-backend",
-    timestamp: new Date().toISOString(),
-  });
-});
+router.get("/", getHealth);
 
 module.exports = router;
