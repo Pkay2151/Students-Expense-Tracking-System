@@ -1,8 +1,13 @@
 const mongoose = require("mongoose");
 
 async function connectDb() {
-  const mongoUri =
-    process.env.MONGODB_URI || "mongodb+srv://Admin:AnTRmibp4hUynD8v@backenddb.soipk3m.mongodb.net/?appName=BackendDB";
+  const mongoUri = process.env.MONGODB_URI;
+
+  if (!mongoUri) {
+    throw new Error(
+      "MONGODB_URI is not defined. Please set it in your .env file."
+    );
+  }
 
   await mongoose.connect(mongoUri);
   console.log("MongoDB connected");
