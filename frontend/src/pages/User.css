@@ -1,0 +1,332 @@
+/* User Profile Page Styles */
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Profile Header Card */
+.profile-header-card {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 40px;
+  background: var(--sidebar-bg);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.profile-avatar-large {
+  width: 120px;
+  height: 120px;
+  min-width: 120px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--bg-color);
+  box-shadow: 0 8px 24px rgba(11, 79, 108, 0.22);
+}
+
+.profile-header-info h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 12px;
+}
+
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--sidebar-active-bg);
+  border-radius: 20px;
+  color: var(--sidebar-active-text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.role-badge svg {
+  color: var(--sidebar-active-text);
+}
+
+/* Profile Info Grid */
+.profile-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+
+.profile-info-card {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  min-height: 190px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+.profile-info-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.info-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.info-card-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.info-card-icon.email {
+  background: var(--sidebar-bg);
+  color: var(--primary);
+}
+
+.info-card-icon.role {
+  background: var(--sidebar-active-bg);
+  color: var(--sidebar-active-text);
+}
+
+.info-card-icon.user-id {
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+}
+
+.info-card-icon.created {
+  background: var(--card-mint);
+  color: var(--primary);
+}
+
+.info-card-header h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.info-card-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 8px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.info-card-label {
+  margin-top: auto;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Edit Profile Button */
+.edit-profile-btn {
+  transition: all 0.2s ease;
+}
+
+.edit-profile-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--bg-color);
+}
+
+/* Account Settings Section */
+.account-settings-section {
+  padding: 32px;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.account-settings-section h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.settings-options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.setting-status {
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.setting-status.success {
+  color: var(--primary);
+  background: var(--sidebar-active-bg);
+  border: 1px solid var(--card-mint);
+}
+
+.setting-status.error {
+  color: var(--primary);
+  background: var(--sidebar-bg);
+  border: 1px solid var(--border-color);
+}
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: var(--sidebar-bg);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.setting-item:hover {
+  background: var(--sidebar-active-bg);
+  border-color: var(--primary);
+}
+
+.setting-info {
+  flex: 1;
+}
+
+.setting-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0;
+  margin-bottom: 4px;
+}
+
+.setting-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  display: block;
+}
+
+.btn-secondary {
+  padding: 8px 20px;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  margin-left: 16px;
+  flex-shrink: 0;
+}
+
+.btn-secondary:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--bg-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-header-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 32px 24px;
+    gap: 24px;
+  }
+
+  .profile-header-info h2 {
+    font-size: 24px;
+  }
+
+  .profile-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-info-card {
+    min-height: auto;
+  }
+
+  .info-card-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .info-card-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .setting-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .btn-secondary {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .account-settings-section {
+    padding: 24px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-avatar-large {
+    width: 100px;
+    height: 100px;
+    font-size: 40px;
+  }
+
+  .profile-header-info h2 {
+    font-size: 20px;
+  }
+
+  .info-card-value {
+    font-size: 16px;
+  }
+
+  .profile-info-card {
+    padding: 16px;
+  }
+}

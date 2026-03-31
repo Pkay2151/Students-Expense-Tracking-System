@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Wallets from './pages/Wallets';
 import Analytics from './pages/Analytics';
 import Budget from './pages/Budget';
+import User from './pages/User';
 import { ExpenseProvider } from './context/ExpenseContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import './index.css';
@@ -45,6 +46,7 @@ function App() {
               <Route path="wallets" element={<Wallets />} />
               <Route path="analytics" element={<Analytics />} />
               <Route path="budget" element={<Budget />} />
+              <Route path="profile" element={<User />} />
             </Route>
             
             {/* Catch-all redirect */}

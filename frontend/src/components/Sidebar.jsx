@@ -48,6 +48,10 @@ function Sidebar({ isOpen, onClose }) {
             <PieChart size={20} className="sidebar-icon" />
             Analytics
           </NavLink>
+          <NavLink to="/dashboard/profile" className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"} onClick={handleLinkClick}>
+            <User size={20} className="sidebar-icon" />
+            User
+          </NavLink>
         </nav>
 
         <div className="sidebar-user">
