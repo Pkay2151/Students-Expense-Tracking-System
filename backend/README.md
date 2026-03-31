@@ -24,7 +24,11 @@ Copy `.env.example` values into your environment:
 
 ## Authentication Approach (Current)
 Protected routes require header:
-- `x-user-id: <some-user-id>`
+- `x-user-id: <some-user-id>` or `x-user-uid: <firebase-uid>`
+
+Optional identity headers:
+- `x-user-email: <user-email>`
+- `x-user-name: <display-name>`
 
 This keeps data separated per user in MongoDB.
 
@@ -38,6 +42,8 @@ This keeps data separated per user in MongoDB.
 - `GET /api/budgets`
 - `POST /api/budgets`
 - `GET /api/summary`
+- `GET /api/profile`
+- `PUT /api/profile`
 
 ## Example Request
 Create wallet:
