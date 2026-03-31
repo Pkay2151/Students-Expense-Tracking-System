@@ -8,6 +8,7 @@ const walletsRoutes = require("./routes/wallets");
 const transactionsRoutes = require("./routes/transactions");
 const budgetsRoutes = require("./routes/budgets");
 const summaryRoutes = require("./routes/summary");
+const profileRoutes = require("./routes/profile");
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use("/api/wallets", walletsRoutes);
 app.use("/api/transactions", transactionsRoutes);
 app.use("/api/budgets", budgetsRoutes);
 app.use("/api/summary", summaryRoutes);
+app.use("/api/profile", profileRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err);
