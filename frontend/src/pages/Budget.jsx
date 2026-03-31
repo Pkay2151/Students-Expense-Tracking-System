@@ -7,20 +7,31 @@ import './Dashboard.css';
 
 function Budget() {
   const { state, addBudget } = useExpense();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     category: '',
     limit: '',
     threshold: 80
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.category || !formData.limit) return alert("Please select a category and limit");
-    addBudget({
-      ...formData,
-      limit: parseFloat(formData.limit),
-      threshold: parseFloat(formData.threshold)
-    });
+
+    try {
+      setIsSubmitting(true);
+      await addBudget({
+        ...formData,
+        limit: parseFloat(formData.limit),
+        threshold: parseFloat(formData.threshold)
+      });
+    } catch (error) {
+      alert(error.message || 'Failed to save budget');
+      return;
+    } finally {
+      setIsSubmitting(false);
+    }
+
     setFormData({ category: '', limit: '', threshold: 80 });
   };
 
@@ -174,7 +185,7 @@ function Budget() {
               </div>
 
               <div className="mt-24">
-                <Button variant="primary" type="submit">Create Budget</Button>
+                <Button variant="primary" type="submit">{isSubmitting ? 'Saving...' : 'Create Budget'}</Button>
               </div>
             </form>
           </div>

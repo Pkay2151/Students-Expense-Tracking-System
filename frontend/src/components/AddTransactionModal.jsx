@@ -6,6 +6,7 @@ import Input from './Input';
 
 function AddTransactionModal({ isOpen, onClose }) {
   const { state, addTransaction } = useExpense();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
     amount: '',
@@ -16,12 +17,20 @@ function AddTransactionModal({ isOpen, onClose }) {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.walletId) return alert('Please add a wallet first from the Wallets page.');
     if (!formData.title || !formData.amount) return alert('Please fill in all fields.');
-    
-    addTransaction(formData);
+
+    try {
+      setIsSubmitting(true);
+      await addTransaction(formData);
+    } catch (error) {
+      alert(error.message || 'Failed to save transaction');
+      return;
+    } finally {
+      setIsSubmitting(false);
+    }
     
     // Reset and close
     setFormData({ ...formData, title: '', amount: '' });
@@ -95,7 +104,7 @@ function AddTransactionModal({ isOpen, onClose }) {
           </div>
 
           <div className="mt-16">
-            <Button variant="primary" type="submit">Save Transaction</Button>
+            <Button variant="primary" type="submit">{isSubmitting ? 'Saving...' : 'Save Transaction'}</Button>
           </div>
         </form>
       </div>

@@ -3,6 +3,7 @@ import { User as UserIcon, Mail, BadgeCheck, Calendar, Shield, Edit2 } from 'luc
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { useAuth } from '../context/AuthContext';
 import { auth } from '../firebase';
+import { apiRequest } from '../utils/api';
 import './Dashboard.css';
 import './User.css';
 
@@ -11,6 +12,7 @@ function User() {
   const [userRole] = useState('Student');
   const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
   const [emailNotificationsEnabled, setEmailNotificationsEnabled] = useState(true);
+  const [profile, setProfile] = useState(null);
   const [isSendingReset, setIsSendingReset] = useState(false);
   const [statusMessage, setStatusMessage] = useState({ type: '', text: '' });
 
@@ -26,9 +28,24 @@ function User() {
       setTwoFactorEnabled(storedTwoFactor === 'true');
     }
 
-    if (storedNotifications !== null) {
-      setEmailNotificationsEnabled(storedNotifications === 'true');
-    }
+    let isMounted = true;
+
+    apiRequest('/profile', { user: currentUser })
+      .then((savedProfile) => {
+        if (!isMounted) return;
+        setProfile(savedProfile);
+        setEmailNotificationsEnabled(Boolean(savedProfile?.preferences?.receiveBudgetAlerts));
+      })
+      .catch(() => {
+        if (!isMounted) return;
+        if (storedNotifications !== null) {
+          setEmailNotificationsEnabled(storedNotifications === 'true');
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, [currentUser?.uid]);
 
   const saveSetting = (key, value) => {
@@ -72,19 +89,44 @@ function User() {
     });
   };
 
-  const handleToggleNotifications = () => {
+  const handleToggleNotifications = async () => {
     const next = !emailNotificationsEnabled;
+    const previous = emailNotificationsEnabled;
     setEmailNotificationsEnabled(next);
-    saveSetting('emailNotificationsEnabled', next);
-    setStatusMessage({
-      type: 'success',
-      text: next ? 'Email notifications enabled.' : 'Email notifications muted.'
-    });
+
+    try {
+      const savedProfile = await apiRequest('/profile', {
+        user: currentUser,
+        method: 'PUT',
+        body: {
+          preferences: {
+            receiveBudgetAlerts: next,
+          },
+        },
+      });
+
+      setProfile(savedProfile);
+      saveSetting('emailNotificationsEnabled', next);
+      setStatusMessage({
+        type: 'success',
+        text: next ? 'Email notifications enabled.' : 'Email notifications muted.'
+      });
+    } catch {
+      setEmailNotificationsEnabled(previous);
+      setStatusMessage({
+        type: 'error',
+        text: 'Could not update notification preference. Please try again.'
+      });
+    }
   };
 
-  const initials = currentUser?.displayName 
-    ? currentUser.displayName.charAt(0).toUpperCase() 
-    : (currentUser?.email ? currentUser.email.charAt(0).toUpperCase() : 'U');
+  const displayName = profile?.fullName || currentUser?.displayName || 'Student User';
+  const displayEmail = profile?.email || currentUser?.email || 'Not provided';
+  const displayCurrency = profile?.currency || 'GHS';
+
+  const initials = displayName
+    ? displayName.charAt(0).toUpperCase()
+    : (displayEmail ? displayEmail.charAt(0).toUpperCase() : 'U');
 
   const createdDate = currentUser?.metadata?.creationTime 
     ? new Date(currentUser.metadata.creationTime).toLocaleDateString('en-US', { 
@@ -113,7 +155,7 @@ function User() {
             {initials}
           </div>
           <div className="profile-header-info">
-            <h2>{currentUser?.displayName || 'Student User'}</h2>
+            <h2>{displayName}</h2>
             <div className="role-badge">
               <BadgeCheck size={16} />
               <span>{userRole}</span>
@@ -131,8 +173,19 @@ function User() {
               </div>
               <h3>Email Address</h3>
             </div>
-            <p className="info-card-value">{currentUser?.email || 'Not provided'}</p>
+            <p className="info-card-value">{displayEmail}</p>
             <span className="info-card-label">Your primary contact email</span>
+          </div>
+
+          <div className="profile-info-card">
+            <div className="info-card-header">
+              <div className="info-card-icon role">
+                <BadgeCheck size={20} />
+              </div>
+              <h3>Preferred Currency</h3>
+            </div>
+            <p className="info-card-value">{displayCurrency}</p>
+            <span className="info-card-label">Saved to your backend profile</span>
           </div>
 
           {/* Role Card */}

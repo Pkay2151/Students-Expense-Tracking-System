@@ -6,6 +6,7 @@ import Input from './Input';
 
 function QuickTransferModal({ isOpen, onClose }) {
   const { state, transferFunds } = useExpense();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     sourceWalletId: state.wallets.length > 0 ? state.wallets[0].id : '',
     targetWalletId: state.wallets.length > 1 ? state.wallets[1].id : '',
@@ -15,7 +16,7 @@ function QuickTransferModal({ isOpen, onClose }) {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.sourceWalletId || !formData.targetWalletId) return alert('Select both accounts!');
     if (formData.sourceWalletId === formData.targetWalletId) return alert('Cannot transfer to the same account!');
@@ -24,7 +25,16 @@ function QuickTransferModal({ isOpen, onClose }) {
     const sourceWallet = state.wallets.find(w => w.id === formData.sourceWalletId);
     if (sourceWallet.balance < parseFloat(formData.amount)) return alert('Insufficient funds in source account!');
 
-    transferFunds(formData);
+    try {
+      setIsSubmitting(true);
+      await transferFunds(formData);
+    } catch (error) {
+      alert(error.message || 'Failed to transfer funds');
+      return;
+    } finally {
+      setIsSubmitting(false);
+    }
+
     setFormData({ ...formData, amount: '' });
     onClose();
   };
@@ -75,7 +85,7 @@ function QuickTransferModal({ isOpen, onClose }) {
           />
 
           <div className="mt-16">
-            <Button variant="primary" type="submit" width="100%">Transfer Funds</Button>
+            <Button variant="primary" type="submit" width="100%">{isSubmitting ? 'Transferring...' : 'Transfer Funds'}</Button>
           </div>
         </form>
       </div>

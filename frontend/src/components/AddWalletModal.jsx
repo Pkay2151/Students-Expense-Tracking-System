@@ -6,6 +6,7 @@ import Input from './Input';
 
 function AddWalletModal({ isOpen, onClose }) {
   const { addWallet } = useExpense();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     type: 'bank',
@@ -14,10 +15,19 @@ function AddWalletModal({ isOpen, onClose }) {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name) return alert('Name is required');
-    addWallet(formData);
+
+    try {
+      setIsSubmitting(true);
+      await addWallet(formData);
+    } catch (error) {
+      alert(error.message || 'Failed to create account');
+      return;
+    } finally {
+      setIsSubmitting(false);
+    }
     
     // Reset and close
     setFormData({ name: '', type: 'bank', balance: '' });
@@ -66,7 +76,7 @@ function AddWalletModal({ isOpen, onClose }) {
           />
 
           <div className="mt-16">
-            <Button variant="primary" type="submit">Create Account</Button>
+            <Button variant="primary" type="submit">{isSubmitting ? 'Creating...' : 'Create Account'}</Button>
           </div>
         </form>
       </div>
