@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, Target, AlertCircle } from 'lucide-react';
+import { Plus, Target, AlertCircle, X } from 'lucide-react';
 import { useExpense } from '../context/ExpenseContext';
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -8,11 +8,21 @@ import './Dashboard.css';
 function Budget() {
   const { state, addBudget } = useExpense();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     category: '',
     limit: '',
     threshold: 80
   });
+
+  const handleNewBudgetClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    if (isSubmitting) return;
+    setIsModalOpen(false);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,6 +43,7 @@ function Budget() {
     }
 
     setFormData({ category: '', limit: '', threshold: 80 });
+    setIsModalOpen(false);
   };
 
   const totalBudgeted = state.budgets.reduce((sum, b) => sum + b.limit, 0);
@@ -52,7 +63,7 @@ function Budget() {
           <p className="dashboard-page-subtitle">Set targets and track your spending limits.</p>
         </div>
         <div className="header-actions">
-          <button className="btn btn-primary btn-sm" style={{borderRadius: '24px'}} onClick={() => window.scrollTo(0, document.body.scrollHeight)}>
+          <button className="btn btn-primary btn-sm" style={{borderRadius: '24px'}} onClick={handleNewBudgetClick}>
             <Plus size={18} style={{marginRight: '8px'}}/> New Budget
           </button>
         </div>
@@ -134,63 +145,86 @@ function Budget() {
           </div>
         </div>
 
-        {/* Right Column: Create Budget Form */}
+        {/* Right Column: Action Card */}
         <div className="grid-right">
           <div className="widget-card" style={{backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', boxShadow: 'none'}}>
-            <div style={{display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px'}}>
+            <div style={{display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px'}}>
               <div style={{backgroundColor: 'var(--primary)', color: 'white', padding: '8px', borderRadius: '12px'}}>
                 <Target size={20} />
               </div>
               <h3 style={{fontSize: '18px', fontWeight: 700}}>Set New Target</h3>
             </div>
-            
-            <form onSubmit={handleSubmit}>
+            <p style={{fontSize: '14px', color: 'var(--text-muted)', marginBottom: '20px'}}>
+              Create a category budget target in a quick popup form.
+            </p>
+            <Button variant="primary" type="button" onClick={handleNewBudgetClick}>
+              <Plus size={16} style={{ marginRight: '8px' }} /> New Budget
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {isModalOpen && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Create Budget Target</h2>
+              <button onClick={closeModal} className="close-btn" disabled={isSubmitting}>
+                <X size={20} />
+              </button>
+            </div>
+
+            <form onSubmit={handleSubmit} className="modal-form">
               <div className="input-container">
                 <label className="input-label">Category Name</label>
-                <select 
-                  className="input-field" 
-                  style={{cursor: 'pointer'}}
+                <select
+                  className="input-field"
+                  style={{ cursor: 'pointer' }}
                   value={formData.category}
-                  onChange={e => setFormData({...formData, category: e.target.value})}
+                  onChange={e => setFormData({ ...formData, category: e.target.value })}
                 >
-                   <option value="">Select Category...</option>
-                   <option value="Food & Drinks">Food & Drinks</option>
-                   <option value="Transport">Transport</option>
-                   <option value="Learning Materials">Learning Materials</option>
-                   <option value="Utilities">Utilities</option>
-                   <option value="Entertainment">Entertainment</option>
+                  <option value="">Select Category...</option>
+                  <option value="Food & Drinks">Food & Drinks</option>
+                  <option value="Transport">Transport</option>
+                  <option value="Learning Materials">Learning Materials</option>
+                  <option value="Utilities">Utilities</option>
+                  <option value="Entertainment">Entertainment</option>
                 </select>
               </div>
 
-              <Input 
-                id="limit" 
-                label="Monthly Limit (GH¢)" 
-                type="number" 
+              <Input
+                id="limit"
+                label="Monthly Limit (GH¢)"
+                type="number"
                 step="0.01"
-                placeholder="e.g. 150.00" 
+                placeholder="e.g. 150.00"
                 value={formData.limit}
-                onChange={e => setFormData({...formData, limit: e.target.value})}
+                onChange={e => setFormData({ ...formData, limit: e.target.value })}
               />
-              
+
               <div className="input-container">
-                 <label className="input-label">Alert Threshold (%)</label>
-                 <Input 
-                    id="threshold" 
-                    type="number" 
-                    placeholder="80" 
-                    value={formData.threshold}
-                    onChange={e => setFormData({...formData, threshold: e.target.value})}
-                 />
-                 <span style={{fontSize: '12px', color: 'var(--text-muted)', marginTop: '8px', display: 'block'}}>We'll alert you when spending hits this percentage.</span>
+                <label className="input-label">Alert Threshold (%)</label>
+                <Input
+                  id="threshold"
+                  type="number"
+                  placeholder="80"
+                  value={formData.threshold}
+                  onChange={e => setFormData({ ...formData, threshold: e.target.value })}
+                />
+                <span style={{fontSize: '12px', color: 'var(--text-muted)', marginTop: '8px', display: 'block'}}>
+                  We&apos;ll alert you when spending hits this percentage.
+                </span>
               </div>
 
-              <div className="mt-24">
-                <Button variant="primary" type="submit">{isSubmitting ? 'Saving...' : 'Create Budget'}</Button>
+              <div className="mt-16">
+                <Button variant="primary" type="submit">
+                  {isSubmitting ? 'Saving...' : 'Create Budget'}
+                </Button>
               </div>
             </form>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
