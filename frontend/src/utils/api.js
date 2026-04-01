@@ -1,4 +1,9 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://students-expense-tracking-system.onrender.com/api";
+const defaultApiBaseUrl =
+  typeof window !== "undefined" && window.location.hostname === "localhost"
+    ? "http://localhost:5000/api"
+    : "https://students-expense-tracking-system.onrender.com/api";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || defaultApiBaseUrl;
 
 function buildUserHeaders(user) {
   if (!user) return {};
