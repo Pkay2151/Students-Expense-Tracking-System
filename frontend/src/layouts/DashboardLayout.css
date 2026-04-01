@@ -1,0 +1,111 @@
+/* Mobile Header & Sidebar Overlays */
+.mobile-header {
+  display: none;
+}
+
+.mobile-close-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 90;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+@media (max-width: 1024px) {
+  /* Some tablets */
+  .dashboard-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+  
+  .mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background-color: var(--sidebar-bg);
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .dashboard-main {
+    padding: 24px 16px;
+    height: calc(100vh - 72px);
+    overflow-y: auto;
+  }
+  
+  .sidebar {
+    position: fixed;
+    left: -320px;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 4px 0 24px rgba(0,0,0,0.1);
+  }
+  
+  .sidebar.open {
+    left: 0;
+  }
+  
+  .sidebar-overlay {
+    display: block;
+    pointer-events: none;
+  }
+  
+  .sidebar-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .mobile-close-btn {
+    display: block;
+  }
+  
+  /* Page specific responsive tweaks */
+  .header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .balance-card .balance-stats {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .search-filter-bar {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .search-input {
+    max-width: none;
+  }
+  
+  .wallets-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
