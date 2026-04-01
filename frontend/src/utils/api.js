@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://students-expense-tracking-system.onrender.com/api";
 
 function buildUserHeaders(user) {
   if (!user) return {};

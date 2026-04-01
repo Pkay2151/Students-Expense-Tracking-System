@@ -28,12 +28,12 @@ npm run dev
 ## Environment Variables
 The frontend can be configured with the following variable:
 
-- `VITE_API_BASE_URL` - Backend API base URL. Defaults to `http://localhost:5000/api` if not provided.
+- `VITE_API_BASE_URL` - Backend API base URL. Defaults to `https://students-expense-tracking-system.onrender.com/api` if not provided.
 
 Example:
 
 ```env
-VITE_API_BASE_URL=http://localhost:5000/api
+VITE_API_BASE_URL=https://students-expense-tracking-system.onrender.com/api
 ```
 
 ## Authentication
