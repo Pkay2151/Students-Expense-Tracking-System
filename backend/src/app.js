@@ -37,6 +37,10 @@ app.use("/api/budgets", budgetsRoutes);
 app.use("/api/summary", summaryRoutes);
 app.use("/api/profile", profileRoutes);
 
+app.get("/", (req, res) => {
+  res.json({ message: "Students Expense Tracking System backend is running" });
+});
+
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).json({ message: "Internal server error" });
