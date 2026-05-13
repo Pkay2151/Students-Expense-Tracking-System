@@ -12,13 +12,23 @@ const profileRoutes = require("./routes/profile");
 
 const app = express();
 
-// Parse allowed origins from env or use defaults
-const allowedOrigins = (process.env.FRONTEND_ORIGIN || "http://localhost:5173").split(",").map(o => o.trim());
+function normalizeOrigin(value) {
+  return typeof value === "string" ? value.trim().replace(/\/+$/, "") : "";
+}
+
+// Parse allowed origins from env or use defaults for local + hosted frontend
+const defaultOrigins = ["http://localhost:5173", "https://students-expense-tracking-system.netlify.app"];
+const allowedOrigins = (process.env.FRONTEND_ORIGIN || defaultOrigins.join(","))
+  .split(",")
+  .map(normalizeOrigin)
+  .filter(Boolean);
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
+      const normalizedOrigin = normalizeOrigin(origin);
+
+      if (!normalizedOrigin || allowedOrigins.includes(normalizedOrigin)) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
